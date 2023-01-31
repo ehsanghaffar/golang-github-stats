@@ -1,10 +1,9 @@
 package api
 
 import (
-	"fmt"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"reflect"
 )
 
 type User struct {
@@ -42,31 +41,36 @@ type User struct {
 	UpdatedAt         string      `json:"updated_at"`
 }
 
-// api_url := "https://api.github.com/users/"
+// return error func
+func perror(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
 
-func GetUserData(username, query string) {
+func GetUserData(username string) User {
 
-	if query == "" || reflect.ValueOf(query).IsNil() {
-		data, err := http.Get("https://api.github.com/users/" + username)
+	res, dataErr := http.Get("https://api.github.com/users/" + username)
 
-		user, err := ioutil.ReadAll(data.Body)
-		jsonData := string(user)
-
-		if err != nil {
-			fmt.Println(err)
-		}
-		fmt.Println(jsonData)
+	if dataErr != nil {
+		perror(dataErr)
 	}
 
-	data, err := http.Get("https://api.github.com/users/" + username + "/" + query)
+	defer res.Body.Close()
 
-	user, err := ioutil.ReadAll(data.Body)
-
-	jsonData := string(user)
+	body, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		fmt.Println(err)
+		perror(err)
 	}
-	fmt.Println(jsonData)
 
+	var data User
+
+	decodeErr := json.Unmarshal(body, &data)
+
+	if decodeErr != nil {
+		perror(err)
+	}
+
+	return data
 }
