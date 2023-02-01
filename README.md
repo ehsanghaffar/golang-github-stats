@@ -6,5 +6,8 @@ Showing GitHub user information on the chart and... in the Go programming langua
 
 ### TODO:
 
-- [ ] Add envirment variables.
-- [ ] ...
+<!-- &#9745; -->
+ &#9744; Add envirment variables.
+<!-- - 
+- 
+- &#9745; -->
