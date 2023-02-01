@@ -4,4 +4,7 @@ Showing GitHub user information on the chart and... in the Go programming langua
 
 > This repository is under development.
 
-## How to work
+### TODO:
+
+- [ ] Add envirment variables.
+- [ ] ...
