@@ -1,22 +1,31 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	// "fmt"
+	"log"
+	"net/http"
 
-	"github.com/ehsanghaffar/github-stats-golang/api"
+	// "github.com/ehsanghaffar/github-stats-golang/api"
+	"github.com/ehsanghaffar/github-stats-golang/charts"
+	"github.com/ehsanghaffar/github-stats-golang/utils"
 )
 
 func main() {
 
-	user := api.GetUserData("ehsanghaffar")
+	// user := api.GetUserData("ehsanghaffar")
+	// fmt.Println(utils.PrettyPrint(user))
 
-	fmt.Println(PrettyPrint(user))
+	example := []charts.Exampler{
+		charts.BarType{},
+	}
 
-}
+	for _, e := range example {
+		e.Example()
+	}
 
-// PrettyPrint to print struct in a readable way
-func PrettyPrint(i interface{}) string {
-	s, _ := json.MarshalIndent(i, "", "\t")
-	return string(s)
+	// Run webserver for serve charts
+	fs := http.FileServer(http.Dir("html"))
+	log.Println("Server runing at http://localhost:3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", utils.LogRequest(fs)))
+
 }

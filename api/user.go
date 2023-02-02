@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/ehsanghaffar/github-stats-golang/utils"
 )
 
 type User struct {
@@ -41,36 +43,24 @@ type User struct {
 	UpdatedAt         string      `json:"updated_at"`
 }
 
-// return error func
-func perror(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
+// Get Github user data user using Github REST-API
 func GetUserData(username string) User {
 
 	res, dataErr := http.Get("https://api.github.com/users/" + username)
-
 	if dataErr != nil {
-		perror(dataErr)
+		utils.Perror(dataErr)
 	}
 
 	defer res.Body.Close()
-
 	body, err := ioutil.ReadAll(res.Body)
-
 	if err != nil {
-		perror(err)
+		utils.Perror(err)
 	}
 
 	var data User
-
 	decodeErr := json.Unmarshal(body, &data)
-
 	if decodeErr != nil {
-		perror(err)
+		utils.Perror(err)
 	}
-
 	return data
 }
