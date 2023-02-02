@@ -8,7 +8,9 @@ Showing GitHub user information on the chart and... in the Go programming langua
 
 &#9745; Add chart package - [Go-Echarts](https://github.com/go-echarts/go-echarts)
 
-&#9745; Create a example chart [Bar Chart](./charts/bar.go)
+&#9745; Create a bar chart [Bar Chart](./charts/bar.go)
+
+&#9745; Create a pie chart [Bar Chart](./charts/pie.go)
 
 &#9745; Serve chart
 

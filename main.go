@@ -17,6 +17,7 @@ func main() {
 
 	example := []charts.Exampler{
 		charts.BarType{},
+		charts.PieType{},
 	}
 
 	for _, e := range example {
