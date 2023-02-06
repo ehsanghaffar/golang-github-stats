@@ -1,8 +1,8 @@
 package charts
 
 import (
-	"fmt"
 	"io"
+	"log"
 	"math/rand"
 
 	// "math/rand"
@@ -42,7 +42,7 @@ func genPieItems() []opts.PieData {
 
 	removeDuplicateStr(languages)
 
-	fmt.Println(languages)
+	log.Println(languages)
 
 	items := make([]opts.PieData, 0)
 	for i := 0; i < itemCount; i++ {
@@ -63,7 +63,7 @@ func removeDuplicateStr(strSlice []string) []string {
 			list = append(list, item)
 		}
 	}
-	fmt.Println("list", list)
+	log.Println("list", list)
 	return list
 }
 
